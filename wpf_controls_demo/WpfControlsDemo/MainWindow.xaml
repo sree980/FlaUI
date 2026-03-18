@@ -1,0 +1,174 @@
+<Window x:Class="WpfControlsDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WpfControlsDemo"
+        Title="WPF Controls Demo" Height="740" Width="900">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Menu -->
+        <Menu AutomationProperties.AutomationId="MainMenu">
+            <MenuItem Header="File" AutomationProperties.AutomationId="MenuFile">
+                <MenuItem Header="Open" AutomationProperties.AutomationId="MenuFileOpen" Click="MenuFileOpen_Click"/>
+                <MenuItem Header="Exit" AutomationProperties.AutomationId="MenuFileExit" Click="MenuFileExit_Click"/>
+            </MenuItem>
+            <MenuItem Header="Help" AutomationProperties.AutomationId="MenuHelp">
+                <MenuItem Header="About" AutomationProperties.AutomationId="MenuHelpAbout" Click="MenuHelpAbout_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Orientation="Vertical" Margin="6">
+
+                <!-- Buttons, Label, Hyperlink -->
+                <StackPanel Orientation="Horizontal" Margin="0,6">
+                    <Button AutomationProperties.AutomationId="BtnSimple" Width="120" Height="30" Click="BtnSimple_Click">
+                        Click Me
+                    </Button>
+
+                    <Label x:Name="LblStatus"
+                           AutomationProperties.AutomationId="LblStatus"
+                           Width="300" Height="30" Margin="12,0">
+                        Status: Ready
+                    </Label>
+
+                    <TextBlock AutomationProperties.AutomationId="HyperlinkText"
+                               Margin="12,0" VerticalAlignment="Center">
+                        <Hyperlink NavigateUri="https://github.com/"
+                                   RequestNavigate="Hyperlink_RequestNavigate">
+                            Open GitHub
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+
+                <!-- TextBox + ComboBox + CheckBox + RadioButtons -->
+                <StackPanel Orientation="Horizontal" Margin="0,6">
+
+                    <StackPanel>
+                        <TextBlock>TextBox</TextBlock>
+                        <TextBox AutomationProperties.AutomationId="TxtInput" Width="200">Sample text</TextBox>
+
+                        <TextBlock Margin="0,6">ComboBox</TextBlock>
+                        <ComboBox AutomationProperties.AutomationId="CmbOptions" Width="200" SelectedIndex="0">
+                            <ComboBoxItem AutomationProperties.AutomationId="CmbItem1">Option 1</ComboBoxItem>
+                            <ComboBoxItem AutomationProperties.AutomationId="CmbItem2">Option 2</ComboBoxItem>
+                            <ComboBoxItem AutomationProperties.AutomationId="CmbItem3">Option 3</ComboBoxItem>
+                        </ComboBox>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,6">
+                            <CheckBox AutomationProperties.AutomationId="ChkAgree">I agree</CheckBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,6">
+                            <RadioButton AutomationProperties.AutomationId="RbA"
+                                         GroupName="grp" IsChecked="True">
+                                Choice A
+                            </RadioButton>
+                            <RadioButton AutomationProperties.AutomationId="RbB" GroupName="grp">
+                                Choice B
+                            </RadioButton>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <!-- ListBox & ListView -->
+                    <StackPanel Margin="24,0">
+                        <TextBlock>ListBox</TextBlock>
+                        <ListBox AutomationProperties.AutomationId="LstBox" Width="200" Height="80">
+                            <ListBoxItem AutomationProperties.AutomationId="LstBoxItem1">Item One</ListBoxItem>
+                            <ListBoxItem AutomationProperties.AutomationId="LstBoxItem2">Item Two</ListBoxItem>
+                            <ListBoxItem AutomationProperties.AutomationId="LstBoxItem3">Item Three</ListBoxItem>
+                        </ListBox>
+
+                        <TextBlock Margin="0,6">ListView</TextBlock>
+
+                        <!-- IMPORTANT: x:Name added -->
+                        <ListView x:Name="ListViewSimple"
+                                  AutomationProperties.AutomationId="ListViewSimple"
+                                  Width="320" Height="90">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                                    <GridViewColumn Header="Value" DisplayMemberBinding="{Binding Value}" Width="150"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- DataGrid -->
+                <StackPanel Margin="0,12">
+                    <TextBlock>DataGrid</TextBlock>
+
+                    <!-- IMPORTANT: x:Name added -->
+                    <DataGrid x:Name="DataGridSample"
+                              AutomationProperties.AutomationId="DataGridSample"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              Height="160">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="80"/>
+                            <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+                            <DataGridCheckBoxColumn Header="Active" Binding="{Binding IsActive}" Width="80"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+
+                <!-- TreeView -->
+                <StackPanel Margin="0,12">
+                    <TextBlock>TreeView</TextBlock>
+                    <TreeView AutomationProperties.AutomationId="TreeSample" Width="420">
+                        <TreeViewItem AutomationProperties.AutomationId="NodeRoot" Header="Root">
+                            <TreeViewItem AutomationProperties.AutomationId="NodeChild1" Header="Child 1">
+                                <TreeViewItem AutomationProperties.AutomationId="NodeChild1A" Header="Child 1A"/>
+                            </TreeViewItem>
+                            <TreeViewItem AutomationProperties.AutomationId="NodeChild2" Header="Child 2"/>
+                        </TreeViewItem>
+                    </TreeView>
+                </StackPanel>
+
+                <!-- TabControl -->
+                <StackPanel Margin="0,12">
+                    <TextBlock>TabControl</TextBlock>
+                    <TabControl AutomationProperties.AutomationId="Tabs" Width="640" Height="150">
+                        <TabItem AutomationProperties.AutomationId="TabOne" Header="Tab 1">
+                            <TextBlock Margin="6">Content of Tab 1</TextBlock>
+                        </TabItem>
+                        <TabItem AutomationProperties.AutomationId="TabTwo" Header="Tab 2">
+                            <TextBlock Margin="6">Content of Tab 2</TextBlock>
+                        </TabItem>
+                    </TabControl>
+                </StackPanel>
+
+                <!-- Slider & ProgressBar -->
+                <StackPanel Orientation="Horizontal" Margin="0,12">
+                    <StackPanel>
+                        <TextBlock>Slider</TextBlock>
+                        <Slider AutomationProperties.AutomationId="SldValue" Width="300"
+                                Minimum="0" Maximum="100" Value="40" TickFrequency="10"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="24,0">
+                        <TextBlock>ProgressBar</TextBlock>
+                        <ProgressBar AutomationProperties.AutomationId="PbProgress"
+                                     Width="200" Height="20"
+                                     Minimum="0" Maximum="100" Value="40"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Modal Dialog Button -->
+                <StackPanel Margin="0,18">
+                    <Button AutomationProperties.AutomationId="BtnShowDialog"
+                            Width="160" Click="BtnShowDialog_Click">
+                        Show Dialog
+                    </Button>
+                </StackPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

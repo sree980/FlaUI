@@ -1,0 +1,29 @@
+# Visual Studio
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.csproj.user
+packages/
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+
+# NuGet
+.nuget/
+*.nupkg
+*.snupkg
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
